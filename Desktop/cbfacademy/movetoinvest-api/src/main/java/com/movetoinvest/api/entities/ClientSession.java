@@ -3,7 +3,20 @@ package com.movetoinvest.api.entities;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity@Inheritance(strategy = InheritanceType.JOINED)
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = GroupClassSession.class, name = "group"),
+    @JsonSubTypes.Type(value = PrivateSession.class, name = "private")
+})
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public abstract class ClientSession {
 @Id

@@ -1,0 +1,40 @@
+# -------------------------
+# Maven / Build
+# -------------------------
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# -------------------------
+# Local environment
+# -------------------------
+# Your sensitive local config
+/src/main/resources/local.properties
+
+# -------------------------
+# IDE / Editor
+# -------------------------
+# IntelliJ IDEA
+/.idea/
+/*.iml
+/out/
+
+# Eclipse
+/.classpath
+/.project
+/.settings/
+/bin/
+
+# VS Code
+/.vscode/
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
