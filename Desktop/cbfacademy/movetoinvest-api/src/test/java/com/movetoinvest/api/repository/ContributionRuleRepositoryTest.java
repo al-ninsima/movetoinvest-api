@@ -1,10 +1,9 @@
 //ContributionRuleRepositoryTest for testing repository / database behaviour
 
-package com.movetoinvest.api;
+package com.movetoinvest.api.repository;
 
 import com.movetoinvest.api.entities.ContributionRule;
 import com.movetoinvest.api.entities.Portfolio;
-import com.movetoinvest.api.repository.ContributionRuleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

@@ -2,6 +2,7 @@
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/controllers/ClientSessionController.java
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/controllers/ContributionController.java
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/controllers/PortfolioController.java
+/Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/controllers/TestController.java
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/entities/ClientSession.java
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/entities/Contribution.java
 /Users/tori/Desktop/cbfacademy/movetoinvest-api/src/main/java/com/movetoinvest/api/entities/ContributionRule.java

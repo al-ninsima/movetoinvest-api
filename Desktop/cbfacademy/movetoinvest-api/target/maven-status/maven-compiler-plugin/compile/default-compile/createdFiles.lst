@@ -4,6 +4,7 @@ com/movetoinvest/api/entities/PrivateSession.class
 com/movetoinvest/api/repository/ContributionRepository.class
 com/movetoinvest/api/entities/ClientSession.class
 com/movetoinvest/api/controllers/PortfolioController.class
+com/movetoinvest/api/controllers/TestController.class
 com/movetoinvest/api/entities/Portfolio.class
 com/movetoinvest/api/entities/GroupClassSession.class
 com/movetoinvest/api/services/PortfolioService.class
