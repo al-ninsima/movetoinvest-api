@@ -1,4 +1,4 @@
-# move to invest
+# Move to Invest
 
 Teach today, invest tomorrow — your work builds your wealth.
 
