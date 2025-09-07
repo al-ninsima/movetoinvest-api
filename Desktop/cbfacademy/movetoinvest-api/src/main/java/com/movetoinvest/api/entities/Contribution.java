@@ -1,43 +1,38 @@
 package com.movetoinvest.api.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Contribution {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long sessionId;
-    private Long portfolioId;
-    private Double amount;
+    private double amount;
     private String status;
+
+    @ManyToOne
+    private ClientSession session;
+
+    @ManyToOne
+    private ContributionRule ruleApplied;
 
     public Contribution() {}
 
-    public Contribution(Long sessionId, Long portfolioId, Double amount, String status) {
-        this.sessionId = sessionId;
-        this.portfolioId = portfolioId;
-        this.amount = amount;
-        this.status = status;
-    }
-
+    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getSessionId() { return sessionId; }
-    public void setSessionId(Long sessionId) { this.sessionId = sessionId; }
-
-    public Long getPortfolioId() { return portfolioId; }
-    public void setPortfolioId(Long portfolioId) { this.portfolioId = portfolioId; }
-
-    public Double getAmount() { return amount; }
-    public void setAmount(Double amount) { this.amount = amount; }
+    public double getAmount() { return amount; }
+    public void setAmount(double amount) { this.amount = amount; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
+    public ClientSession getSession() { return session; }
+    public void setSession(ClientSession session) { this.session = session; }
+
+    public ContributionRule getRuleApplied() { return ruleApplied; }
+    public void setRuleApplied(ContributionRule ruleApplied) { this.ruleApplied = ruleApplied; }
 }

@@ -1,38 +1,37 @@
 package com.movetoinvest.api.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ContributionRule {
+
+    public static final String PERCENTAGE = "PERCENTAGE";
+    public static final String FLAT = "FLAT";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)  // store as "PERCENTAGE" or "FLAT"
-    private RuleType ruleType;
+    private String ruleType; // "PERCENTAGE" or "FLAT"
+    private double percentageValue;
+    private double capAmount;
+    private double flatAmount;
 
-    // For percentage-based rules
-    private Double percentageValue;
+    public ContributionRule() {}
 
-    // For flat fee rules
-    private Double flatAmount;
+    // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    // Optional cap 
-    private Double capAmount;
+    public String getRuleType() { return ruleType; }
+    public void setRuleType(String ruleType) { this.ruleType = ruleType; }
 
-    @ManyToOne
-    @JoinColumn(name = "portfolio_id")
-    private Portfolio portfolio;
+    public double getPercentageValue() { return percentageValue; }
+    public void setPercentageValue(double percentageValue) { this.percentageValue = percentageValue; }
 
-    public enum RuleType {
-        PERCENTAGE,
-        FLAT
-    }
+    public double getCapAmount() { return capAmount; }
+    public void setCapAmount(double capAmount) { this.capAmount = capAmount; }
+
+    public double getFlatAmount() { return flatAmount; }
+    public void setFlatAmount(double flatAmount) { this.flatAmount = flatAmount; }
 }
-

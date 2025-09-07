@@ -5,7 +5,6 @@ com/movetoinvest/api/repository/ContributionRepository.class
 com/movetoinvest/api/entities/ClientSession.class
 com/movetoinvest/api/controllers/PortfolioController.class
 com/movetoinvest/api/entities/Portfolio.class
-com/movetoinvest/api/entities/ContributionRule$RuleType.class
 com/movetoinvest/api/entities/GroupClassSession.class
 com/movetoinvest/api/services/PortfolioService.class
 com/movetoinvest/api/MovetoinvestApiApplication.class

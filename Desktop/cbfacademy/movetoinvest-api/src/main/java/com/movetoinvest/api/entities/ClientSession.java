@@ -3,50 +3,33 @@ package com.movetoinvest.api.entities;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "type"
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = GroupClassSession.class, name = "group"),
-    @JsonSubTypes.Type(value = PrivateSession.class, name = "private")
-})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public abstract class ClientSession {
-@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long instructorId;
     private LocalDateTime dateTime;
     private int durationMinutes;
     private double fee;
 
-    // Constructors
+    @ManyToOne
+    private Instructor instructor;
+
     public ClientSession() {}
 
-    public ClientSession(Long instructorId, LocalDateTime dateTime, int durationMinutes, double fee) {
-        this.instructorId = instructorId;
+    public ClientSession(Instructor instructor, LocalDateTime dateTime, int durationMinutes, double fee) {
+        this.instructor = instructor;
         this.dateTime = dateTime;
         this.durationMinutes = durationMinutes;
         this.fee = fee;
     }
 
-    // Abstract method
-    public abstract double calculateContribution();
-
-    // Getters & Setters
+    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Long getInstructorId() { return instructorId; }
-    public void setInstructorId(Long instructorId) { this.instructorId = instructorId; }
 
     public LocalDateTime getDateTime() { return dateTime; }
     public void setDateTime(LocalDateTime dateTime) { this.dateTime = dateTime; }
@@ -56,4 +39,9 @@ public abstract class ClientSession {
 
     public double getFee() { return fee; }
     public void setFee(double fee) { this.fee = fee; }
+
+    public Instructor getInstructor() { return instructor; }
+    public void setInstructor(Instructor instructor) { this.instructor = instructor; }
+
+    public abstract double calculateContribution();
 }
