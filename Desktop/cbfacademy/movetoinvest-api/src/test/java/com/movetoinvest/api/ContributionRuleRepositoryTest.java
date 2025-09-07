@@ -1,32 +1,65 @@
+//ContributionRuleRepositoryTest for testing repository / database behaviour
+
 package com.movetoinvest.api;
 
 import com.movetoinvest.api.entities.ContributionRule;
+import com.movetoinvest.api.entities.Portfolio;
 import com.movetoinvest.api.repository.ContributionRuleRepository;
+import com.movetoinvest.api.repository.PortfolioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // optional, if you want real DB instead of H2
 class ContributionRuleRepositoryTest {
+
     @Autowired
     private ContributionRuleRepository contributionRuleRepository;
 
+    @Autowired
+    private PortfolioRepository portfolioRepository;
+
     @Test
-    void testSaveAndFindContributionRule() {
+    void testSavePercentageRule() {
+        Portfolio portfolio = new Portfolio();
+        portfolio.setName("Growth Portfolio");
+        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+
         ContributionRule rule = new ContributionRule();
-        rule.setPercentageOfFee(0.1);
-        rule.setCap(50.0);
-        rule.setActive(true);
+        rule.setRuleType(ContributionRule.RuleType.PERCENTAGE);
+        rule.setPercentageValue(10.0);
+        rule.setCapAmount(100.0);
+        rule.setPortfolio(savedPortfolio);
 
         ContributionRule saved = contributionRuleRepository.save(rule);
-        Optional<ContributionRule> retrieved = contributionRuleRepository.findById(saved.getId());
 
-        assertTrue(retrieved.isPresent());
-        assertEquals(0.1, retrieved.get().getPercentageOfFee());
+        assertThat(saved.getId()).isNotNull();
+        assertThat(saved.getRuleType()).isEqualTo(ContributionRule.RuleType.PERCENTAGE);
+        assertThat(saved.getPercentageValue()).isEqualTo(10.0);
+        assertThat(saved.getCapAmount()).isEqualTo(100.0);
+        assertThat(saved.getPortfolio().getName()).isEqualTo("Growth Portfolio");
     }
 
+    @Test
+    void testSaveFlatRule() {
+        Portfolio portfolio = new Portfolio();
+        portfolio.setName("Flat Fee Portfolio");
+        Portfolio savedPortfolio = portfolioRepository.save(portfolio);
+
+        ContributionRule rule = new ContributionRule();
+        rule.setRuleType(ContributionRule.RuleType.FLAT);
+        rule.setFlatAmount(50.0);
+        rule.setCapAmount(200.0);
+        rule.setPortfolio(savedPortfolio);
+
+        ContributionRule saved = contributionRuleRepository.save(rule);
+
+        assertThat(saved.getId()).isNotNull();
+        assertThat(saved.getRuleType()).isEqualTo(ContributionRule.RuleType.FLAT);
+        assertThat(saved.getFlatAmount()).isEqualTo(50.0);
+        assertThat(saved.getCapAmount()).isEqualTo(200.0);
+        assertThat(saved.getPortfolio().getName()).isEqualTo("Flat Fee Portfolio");
+    }
 }
